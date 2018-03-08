@@ -1,0 +1,47 @@
+# NAME
+
+Perl::Critic::Policy::Variables::ProhibitLoopOnHash - Don't write loops on hashes, only on keys and values of hashes
+
+# VERSION
+
+version 0.001
+
+# DESCRIPTION
+
+When "looping over hashes," we mean looping over hash keys or hash values. If
+you forgot to call `keys` or `values` you will accidentally loop over both.
+
+    foreach my $foo (%hash) {...} # not ok
+    action() for %hash;           # not ok
+
+An effort is made to detect expressions:
+
+    action() for %hash ? keys %hash : ();                        # ok
+    action() for %{ keys $hash{'stuff'} ? $hash{'stuff'} : {} }; # ok
+
+# CONFIGURATION
+
+This policy is not configurable except for the standard options.
+
+# AUTHOR
+
+Sawyer X, `xsaawyerx@cpan.org`
+
+# THANKS
+
+Thank you to Rudd H.G. Van Tol.
+
+# SEE ALSO
+
+[Perl::Critic](https://metacpan.org/pod/Perl::Critic)
+
+# AUTHOR
+
+Sawyer X
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2018 by Sawyer X.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
