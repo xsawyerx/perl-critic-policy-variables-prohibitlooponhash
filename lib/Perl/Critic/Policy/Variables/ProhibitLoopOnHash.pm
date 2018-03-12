@@ -116,8 +116,11 @@ you forgot to call C<keys> or C<values> you will accidentally loop over both.
 
 An effort is made to detect expressions:
 
-    action() for %hash ? keys %hash : ();                        # ok
-    action() for %{ keys $hash{'stuff'} ? $hash{'stuff'} : {} }; # ok
+    action() for %hash ? keys %hash : ();                             # ok
+    action() for %{ $hash{'stuff'} } ? keys %{ $hash{'stuff'} } : (); # ok
+
+(Granted, the second example there doesn't make much sense, but I have found
+a variationo of it in real code.)
 
 =head1 CONFIGURATION
 
