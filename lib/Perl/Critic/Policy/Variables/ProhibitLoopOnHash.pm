@@ -24,7 +24,7 @@ sub violates {
     my ($self, $elem) = @_;
 
     $elem->isa('PPI::Token::Word')
-        and first { $elem eq $_ } qw< for foreach map grep >
+        and first { $elem eq $_ } qw< for foreach >
         or  return ();
 
     # This is how we do it:
