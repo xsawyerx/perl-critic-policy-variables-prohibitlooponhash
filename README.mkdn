@@ -4,15 +4,17 @@ Perl::Critic::Policy::Variables::ProhibitLoopOnHash - Don't write loops on hashe
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # DESCRIPTION
 
 When "looping over hashes," we mean looping over hash keys or hash values. If
 you forgot to call `keys` or `values` you will accidentally loop over both.
 
-    foreach my $foo (%hash) {...} # not ok
-    action() for %hash;           # not ok
+    foreach my $foo (%hash) {...}        # not ok
+    action() for %hash;                  # not ok
+    foreach my $foo ( keys %hash ) {...} # ok
+    action() for values %hash;           # ok
 
 An effort is made to detect expressions:
 
@@ -29,7 +31,7 @@ Sawyer X, `xsaawyerx@cpan.org`
 
 # THANKS
 
-Thank you to Rudd H.G. Van Tol.
+Thank you to Ruud H.G. Van Tol.
 
 # SEE ALSO
 
