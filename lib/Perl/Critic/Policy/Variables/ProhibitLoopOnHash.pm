@@ -109,8 +109,10 @@ __END__
 When "looping over hashes," we mean looping over hash keys or hash values. If
 you forgot to call C<keys> or C<values> you will accidentally loop over both.
 
-    foreach my $foo (%hash) {...} # not ok
-    action() for %hash;           # not ok
+    foreach my $foo (%hash) {...}        # not ok
+    action() for %hash;                  # not ok
+    foreach my $foo ( keys %hash ) {...} # ok
+    action() for values %hash;           # ok
 
 An effort is made to detect expressions:
 
@@ -127,7 +129,7 @@ Sawyer X, C<xsaawyerx@cpan.org>
 
 =head1 THANKS
 
-Thank you to Rudd H.G. Van Tol.
+Thank you to Ruud H.G. Van Tol.
 
 =head1 SEE ALSO
 
