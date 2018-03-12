@@ -9,8 +9,6 @@ use Carp qw< croak >;
 use Perl::Critic::Utils qw< :severities :classification :ppi >;
 use List::Util 'first';
 
-our $VERSION = '0.001';
-
 use constant 'DESC' => 'Looping over hash instead of hash keys or values';
 use constant 'EXPL' => 'You are accidentally looping over the hash itself '
                    . '(both keys and values) '
