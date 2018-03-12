@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    * Fix false positives on map/grep.
+
 0.001     2018-03-08 16:40:44+01:00 Europe/Amsterdam
 
     * Blame Ruud H.G. van Tol.
