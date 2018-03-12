@@ -4,7 +4,7 @@ Perl::Critic::Policy::Variables::ProhibitLoopOnHash - Don't write loops on hashe
 
 # VERSION
 
-version 0.002
+version 0.003
 
 # DESCRIPTION
 
@@ -18,8 +18,11 @@ you forgot to call `keys` or `values` you will accidentally loop over both.
 
 An effort is made to detect expressions:
 
-    action() for %hash ? keys %hash : ();                        # ok
-    action() for %{ keys $hash{'stuff'} ? $hash{'stuff'} : {} }; # ok
+    action() for %hash ? keys %hash : ();                             # ok
+    action() for %{ $hash{'stuff'} } ? keys %{ $hash{'stuff'} } : (); # ok
+
+(Granted, the second example there doesn't make much sense, but I have found
+a variationo of it in real code.)
 
 # CONFIGURATION
 
