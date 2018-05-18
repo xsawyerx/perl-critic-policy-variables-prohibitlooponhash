@@ -33,6 +33,12 @@ sub violates {
     # * Then we check if it's a postfix without parenthesis
     # * Lastly, we handle the remaining cases
 
+    # skip if it is not a loop
+    # for example $var->{for}
+    unless ($elem->snext_sibling) {
+        return ();
+    }
+
     # for my $foo (%hash)
     # we simply skip the "my"
     if ( ( my $scope = $elem->snext_sibling )->isa('PPI::Token::Word') ) {

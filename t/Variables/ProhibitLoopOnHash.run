@@ -61,3 +61,11 @@ print foreach (keys %{ some_big_thing() });
 for my $k (%foo ? sort keys %foo : sort keys %bar) {
 for my $k (%{$foo} ? sort keys %{$foo} : sort keys %{$bar}) {
 for my $k (%{ func() } ? sort keys %{ func() } : sort keys %{ func() }) {
+
+$hash{for}
+$hash->{for}
+$hash->{ for }
+
+$hash{foreach}
+$hash->{foreach}
+$hash->{ foreach }
