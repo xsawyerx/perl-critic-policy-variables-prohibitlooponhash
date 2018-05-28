@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.004     2018-05-28 12:19:40+03:00 Asia/Jerusalem
+
     * Fix handling of $hash{for} and $hashref->{for}.
       Thanks, Igor Yamolov!
 
