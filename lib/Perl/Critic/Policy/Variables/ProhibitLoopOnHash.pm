@@ -33,11 +33,13 @@ sub violates {
     # * Then we check if it's a postfix without parenthesis
     # * Lastly, we handle the remaining cases
 
-    # skip if it is not a loop
-    # for example $var->{for}
-    unless ($elem->snext_sibling) {
-        return ();
-    }
+    # Skip if we do not have the right type of PPI::Statement
+    # For example, "$var->{for}" has a PPI::Statement::Expression
+    # when leading for() is a PPI::Statement::Compound and
+    # a postfix for() is a PPI::Statement
+    # This was originally written as: $elem->snext_sibling or return
+    $elem->parent && $elem->parent->isa('PPI::Statement::Expression')
+        and return;
 
     # for my $foo (%hash)
     # we simply skip the "my"
