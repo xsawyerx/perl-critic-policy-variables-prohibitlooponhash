@@ -54,7 +54,9 @@ sub violates {
     # for $foo (%hash)
     # we simply skip the "$foo"
     if ( ( my $topical = $elem->snext_sibling )->isa('PPI::Token::Symbol') ) {
-        if ( $topical->snext_sibling->isa('PPI::Structure::List') ) {
+        if (   $topical->snext_sibling
+            && $topical->snext_sibling->isa('PPI::Structure::List') )
+        {
             $elem = $topical;
         } else {
             # for $foo (%hash);
