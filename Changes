@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.005     2018-05-31 11:59:25+03:00 Asia/Jerusalem
+
     * RT#125437: Fix "say for @array", reported by
       Ahmed Abdrabo and Andy (@petdance) Lester
 
