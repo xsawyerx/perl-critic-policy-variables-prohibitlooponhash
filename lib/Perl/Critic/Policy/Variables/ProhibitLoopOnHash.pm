@@ -45,7 +45,38 @@ sub violates {
     # we simply skip the "my"
     if ( ( my $scope = $elem->snext_sibling )->isa('PPI::Token::Word') ) {
         if ( first { $scope eq $_ } qw< my our local state > ) {
-            $elem = $scope->snext_sibling;
+            # for my Foo::Bar $baz (%hash)
+            # PPI doesn't handle this well
+            # as you can see from the following dump:
+            #  PPI::Statement::Compound
+            #    PPI::Token::Word    'for'
+            #    PPI::Token::Whitespace      ' '
+            #    PPI::Token::Word    'my'
+            #  PPI::Token::Whitespace        ' '
+            #  PPI::Statement
+            #    PPI::Token::Word    'Foo::BAR'
+            #    PPI::Token::Whitespace      ' '
+            #    PPI::Token::Symbol          '$payment'
+            #    PPI::Token::Whitespace      ' '
+            #    PPI::Structure::List        ( ... )
+            #      PPI::Statement::Expression
+            #        PPI::Token::Symbol      '@bar'
+            #    PPI::Token::Whitespace      ' '
+            #    PPI::Structure::Block       { ... }
+            #      PPI::Token::Whitespace    ' '
+
+            # First, we need to exhaust spaces
+            my $next = $scope;
+            $next = $next->next_token
+                while $next->next_token->isa('PPI::Token::Whitespace');
+
+            # Then we can use 'next_token' to jump to the next one,
+            # even if it's not a sibling
+            $elem = $next->next_token;
+
+            # And if it's a variable attribute, we skip it
+            $elem->isa('PPI::Token::Word')
+                and $elem = $elem->snext_sibling;
         } else {
             # for keys %hash
         }
