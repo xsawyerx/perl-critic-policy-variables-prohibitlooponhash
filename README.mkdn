@@ -4,7 +4,7 @@ Perl::Critic::Policy::Variables::ProhibitLoopOnHash - Don't write loops on hashe
 
 # VERSION
 
-version 0.005
+version 0.006
 
 # DESCRIPTION
 
