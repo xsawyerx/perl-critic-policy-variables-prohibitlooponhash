@@ -28,7 +28,7 @@ print for %{$hash};
 print for %{ something() };
 print foreach %hash;
 
-# name reference variation
+## name reference variation
 ## failures 8
 ## cut
 
