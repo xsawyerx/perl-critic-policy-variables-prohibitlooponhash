@@ -23,9 +23,8 @@ sub applies_to { 'PPI::Token::Word' }
 sub violates {
     my ($self, $elem) = @_;
 
-    $elem->isa('PPI::Token::Word')
-        and first { $elem eq $_ } qw< for foreach >
-        or  return ();
+    first { $elem eq $_ } qw< for foreach >
+        or return ();
 
     # This is how we do it:
     # * First, we clear out scoping (like "my" for "foreach my ...")
