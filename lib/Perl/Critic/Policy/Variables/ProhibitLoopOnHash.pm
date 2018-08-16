@@ -40,6 +40,20 @@ sub violates {
     $elem->parent && $elem->parent->isa('PPI::Statement::Expression')
         and return;
 
+    # for \my %foo
+    if ( !$elem->snext_sibling ) {
+        my $next = $elem->next_token;
+
+        # exhaust spaces
+        $next = $next->next_token
+            while $next->isa('PPI::Token::Whitespace');
+
+        # skip the \
+        if ( $next eq '\\' ) {
+            $elem = $next->next_token;
+        }
+    }
+
     # for my $foo (%hash)
     # we simply skip the "my"
     if ( ( my $scope = $elem->snext_sibling )->isa('PPI::Token::Word') ) {

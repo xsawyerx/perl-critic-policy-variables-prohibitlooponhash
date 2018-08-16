@@ -110,3 +110,8 @@ for my Foo::Bar $foo (@bar) { }
 
 # fails
 for my Foo::Bar $foo (%bar) { }
+
+## name Reference Aliasing
+## failures 0
+## cut
+foreach \my %hash (@array_of_hash_references) {}
