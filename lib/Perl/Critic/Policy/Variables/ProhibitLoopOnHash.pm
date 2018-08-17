@@ -38,7 +38,7 @@ sub violates {
     # a postfix for() is a PPI::Statement
     # This was originally written as: $elem->snext_sibling or return
     $elem->parent && $elem->parent->isa('PPI::Statement::Expression')
-        and return;
+        and return ();
 
     # for \my %foo
     if ( !$elem->snext_sibling ) {
