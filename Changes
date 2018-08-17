@@ -1,7 +1,9 @@
 {{$NEXT}}
 
-    * Fix for reference aliasing syntax (foreach \my %hash...)
+    * Fix for reference aliasing syntax. (foreach \my %hash...)
       Thanks, Ahmed Abdrabo!
+    * Fix edge case of empty for with function.
+      (for Class->method($foo);)
     * Made slightly faster by avoiding an isa() call.
       Thanks, Jader Dias!
 

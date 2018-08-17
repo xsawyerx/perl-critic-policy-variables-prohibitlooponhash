@@ -54,6 +54,29 @@ sub violates {
         }
     }
 
+    # for Class->method($foo)
+    # PPI::Document
+    #   PPI::Statement::Compound
+    #     PPI::Token::Word    'for'
+    #   PPI::Token::Whitespace        ' '
+    #   PPI::Statement
+    #     PPI::Token::Word    'Class'
+    #     PPI::Token::Operator        '->'
+    #     PPI::Token::Word    'method'
+    #     PPI::Structure::List        ( ... )
+    #       PPI::Statement::Expression
+    #         PPI::Token::Symbol      '$foo'
+    #     PPI::Token::Structure       ';'
+    if ( !$elem->snext_sibling && $elem->next_token) {
+        # exhaust spaces
+        $elem = $elem->next_token
+            while $elem->next_token->isa('PPI::Token::Whitespace');
+
+        # just move to next token and continue from there
+        $elem->next_token
+            and $elem = $elem->next_token;
+    }
+
     # for my $foo (%hash)
     # we simply skip the "my"
     if ( ( my $scope = $elem->snext_sibling )->isa('PPI::Token::Word') ) {
@@ -92,6 +115,7 @@ sub violates {
                 and $elem = $elem->snext_sibling;
         } else {
             # for keys %hash
+            # for Class->method($foo)
         }
     }
 

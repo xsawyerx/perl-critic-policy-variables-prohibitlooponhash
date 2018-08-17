@@ -115,3 +115,8 @@ for my Foo::Bar $foo (%bar) { }
 ## failures 0
 ## cut
 foreach \my %hash (@array_of_hash_references) {}
+
+## name Empty postfix loop
+## failures 0
+## cut
+for Class->method($foo);
