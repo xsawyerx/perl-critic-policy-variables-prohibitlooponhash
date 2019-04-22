@@ -198,7 +198,7 @@ An effort is made to detect expressions:
     action() for %{ $hash{'stuff'} } ? keys %{ $hash{'stuff'} } : (); # ok
 
 (Granted, the second example there doesn't make much sense, but I have found
-a variationo of it in real code.)
+a variation of it in real code.)
 
 =head1 CONFIGURATION
 
@@ -206,7 +206,7 @@ This policy is not configurable except for the standard options.
 
 =head1 AUTHOR
 
-Sawyer X, C<xsaawyerx@cpan.org>
+Sawyer X, C<xsawyerx@cpan.org>
 
 =head1 THANKS
 
