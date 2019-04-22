@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    * GH #3: Some typo fixed. (Jakub Wilk)
+
 0.007     2018-08-17 08:32:29+03:00 Asia/Jerusalem
 
     * Fix for reference aliasing syntax. (foreach \my %hash...)
