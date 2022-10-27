@@ -119,13 +119,18 @@ sub violates {
         }
     }
 
+    my $topical = $elem->snext_sibling
+        or return ();
+
     # for $foo (%hash)
     # we simply skip the "$foo"
-    if ( ( my $topical = $elem->snext_sibling )->isa('PPI::Token::Symbol') ) {
+    if ( $topical->isa('PPI::Token::Symbol') ) {
         if (   $topical->snext_sibling
             && $topical->snext_sibling->isa('PPI::Structure::List') )
         {
             $elem = $topical;
+            $topical = $elem->snext_sibling
+                or return ();
         } else {
             # for $foo (%hash);
         }
@@ -133,14 +138,14 @@ sub violates {
 
     # for %hash
     # (postfix without parens)
-    _check_symbol_or_cast( $elem->snext_sibling )
+    _check_symbol_or_cast( $topical )
         and return $self->violation( DESC(), EXPL(), $elem );
 
     # for (%hash)
-    if ( ( my $list = $elem->snext_sibling )->isa('PPI::Structure::List') ) {
-        my @children = $list->schildren;
+    if ( $topical->isa('PPI::Structure::List') ) {
+        my @children = $topical->schildren;
         @children > 1
-            and croak "List has multiple significant children ($list)";
+            and croak "List has multiple significant children ($topical)";
 
         if ( ( my $statement = $children[0] )->isa('PPI::Statement') ) {
             my @statement_args = $statement->schildren;
