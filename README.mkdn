@@ -46,7 +46,8 @@ Sawyer X
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2020 by Sawyer X.
+This software is Copyright (c) 2026 by Sawyer X.
 
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
+This is free software, licensed under:
+
+    The MIT (X11) License
